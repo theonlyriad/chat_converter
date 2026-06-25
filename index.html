@@ -6,284 +6,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>IG: @theonlyriad, (chat converter/numbers to binary)</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    <title>IG: @theonlyriad — signal panel</title>
+    <link rel="stylesheet" href="style.css">
 
-        :root {
-            --bg1: #0f172a;
-            --bg2: #020617;
-            --card: rgba(255, 255, 255, 0.05);
-            --accent1: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            --btn-main: linear-gradient(90deg, #2563eb, #9333ea);
-            --btn-copy: linear-gradient(90deg, #14b8a6, #06b6d4);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top left, var(--bg1), var(--bg2));
-            color: #e5e7eb;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            background: var(--accent1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .container {
-            background: var(--card);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.12);
-            width: 100%;
-            max-width: 480px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        #input {
-            width: 100%;
-            padding: 14px 12px;
-            border: none;
-            border-radius: 12px;
-            outline: none;
-            font-size: 1rem;
-            margin-bottom: 18px;
-            background: #1e293b;
-            color: #f8fafc;
-        }
-
-        .controls {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .btn {
-            flex: 1 1 45%;
-            background: var(--btn-main);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform .16s, box-shadow .16s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(147, 51, 234, 0.28);
-        }
-
-        .btn.clear {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #cbd5e1;
-        }
-
-        #output {
-            background: #111827;
-            margin-top: 15px;
-            padding: 14px;
-            border-radius: 12px;
-            font-family: monospace;
-            color: #f9fafb;
-            word-break: break-word;
-            min-height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        #mode {
-            font-weight: 600;
-            font-size: 1.05rem;
-            margin-top: 8px;
-            transition: all .4s ease;
-            min-height: 22px;
-        }
-
-        .mode-text {
-            color: #22c55e;
-        }
-
-        .mode-binary {
-            color: #3b82f6;
-        }
-
-        .mode-number {
-            color: #f97316;
-        }
-
-        #copyButton {
-            margin-top: 12px;
-            width: 100%;
-            background: var(--btn-copy);
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: box-shadow .16s, transform .12s;
-        }
-
-        #copyButton:hover {
-            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width:420px) {
-            h1 {
-                font-size: 1.9rem;
-            }
-
-            .btn {
-                flex: 1 1 100%;
-            }
-
-            #input {
-                font-size: .95rem;
-                padding: 12px;
-            }
-
-            #copyButton {
-                padding: 10px;
-                font-size: .95rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <div class="page">
 
-    <h1>IG: @theonlyriad, (chat converter/numbers to binary)</h1>
+        <header>
+            <span class="tag"><span class="dot"></span> Four channels online</span>
+            <h1>Signal panel <span>// chat converter</span></h1>
+            <p class="sub">Each channel below does one conversion and nothing else. Type into a channel, hit run, copy
+                the result. No mode-guessing across the whole page anymore — just pick the channel you need.</p>
+        </header>
 
-    <div class="container">
-        <input id="input" type="text" placeholder="Enter text, binary (0101...), or number (4, 110)">
+        <!-- CHANNEL 1: TEXT <-> BINARY -->
+        <section class="panel" style="--accent: var(--ch1); --accent-dim: var(--ch1-dim);">
+            <div class="panel-head">
+                <div>
+                    <div class="ch-id">Channel 01</div>
+                    <div class="ch-name">Text ⇄ Binary</div>
+                    <div class="ch-desc">Plain words become bytes, bytes become words.</div>
+                </div>
+                <div class="scope" id="scope1">— — — —</div>
+            </div>
+            <div class="panel-body">
+                <label class="field-label" for="textIn">Text or 8-bit binary, space separated</label>
+                <textarea id="textIn" class="field-input" placeholder="hello  or  01101000 01101001"
+                    oninput="pulse('scope1', this.value)"></textarea>
+                <div class="row">
+                    <button class="go" onclick="runTextBinary()">Convert</button>
+                    <button class="ghost" onclick="clearPanel('textIn','textOut','textMode','scope1')">Clear</button>
+                </div>
+                <div class="output-wrap">
+                    <div class="output-meta">
+                        <span class="mode-readout" id="textMode"></span>
+                        <button class="copy-btn" onclick="copyFrom('textOut')">copy</button>
+                    </div>
+                    <div class="output empty" id="textOut">Result appears here</div>
+                </div>
+            </div>
+        </section>
 
-        <div class="controls">
-            <button class="btn" onclick="convert()">Convert</button>
-            <button class="btn clear" onclick="clearAll()">Clear</button>
-        </div>
+        <!-- CHANNEL 2: NUMBER <-> BINARY -->
+        <section class="panel" style="--accent: var(--ch2); --accent-dim: var(--ch2-dim);">
+            <div class="panel-head">
+                <div>
+                    <div class="ch-id">Channel 02</div>
+                    <div class="ch-name">Number ⇄ Binary</div>
+                    <div class="ch-desc">Base-10 in, base-2 out — and back again.</div>
+                </div>
+                <div class="scope" id="scope2">— — — —</div>
+            </div>
+            <div class="panel-body">
+                <label class="field-label" for="numIn">Decimal number or binary digits</label>
+                <input id="numIn" class="field-input" type="text" placeholder="42  or  101010"
+                    oninput="pulse('scope2', this.value)">
+                <div class="row">
+                    <button class="go" onclick="runNumberBinary()">Convert</button>
+                    <button class="ghost" onclick="clearPanel('numIn','numOut','numMode','scope2')">Clear</button>
+                </div>
+                <div class="output-wrap">
+                    <div class="output-meta">
+                        <span class="mode-readout" id="numMode"></span>
+                        <button class="copy-btn" onclick="copyFrom('numOut')">copy</button>
+                    </div>
+                    <div class="output empty" id="numOut">Result appears here</div>
+                </div>
+            </div>
+        </section>
 
-        <p id="mode"></p>
+        <!-- CHANNEL 3: AUTO / MIXED -->
+        <section class="panel" style="--accent: var(--ch3); --accent-dim: var(--ch3-dim);">
+            <div class="panel-head">
+                <div>
+                    <div class="ch-id">Channel 03</div>
+                    <div class="ch-name">Auto-detect</div>
+                    <div class="ch-desc">Not sure what you're holding? Drop it here.</div>
+                </div>
+                <div class="scope" id="scope3">— — — —</div>
+            </div>
+            <div class="panel-body">
+                <label class="field-label" for="autoIn">Anything — text, binary, or a number</label>
+                <textarea id="autoIn" class="field-input" placeholder="paste whatever you've got"
+                    oninput="pulse('scope3', this.value)"></textarea>
+                <div class="row">
+                    <button class="go" onclick="runAuto()">Convert</button>
+                    <button class="ghost" onclick="clearPanel('autoIn','autoOut','autoMode','scope3')">Clear</button>
+                </div>
+                <div class="output-wrap">
+                    <div class="output-meta">
+                        <span class="mode-readout" id="autoMode"></span>
+                        <button class="copy-btn" onclick="copyFrom('autoOut')">copy</button>
+                    </div>
+                    <div class="output empty" id="autoOut">Result appears here</div>
+                </div>
+            </div>
+        </section>
 
-        <div id="output" aria-live="polite"></div>
+        <!-- CHANNEL 4: ALIEN LANGUAGE -->
+        <section class="panel" style="--accent: var(--ch4); --accent-dim: var(--ch4-dim);">
+            <div class="panel-head">
+                <div>
+                    <div class="ch-id">Channel 04</div>
+                    <div class="ch-name">Earth ⇄ Alien</div>
+                    <div class="ch-desc">English in, transmission from elsewhere out — or back.</div>
+                </div>
+                <div class="scope" id="scope4">— — — —</div>
+            </div>
+            <div class="panel-body">
+                <div class="dir-toggle" id="alienDirToggle">
+                    <button type="button" class="dir-btn active" data-dir="toAlien"
+                        onclick="setAlienDirection('toAlien')">English → Alien</button>
+                    <button type="button" class="dir-btn" data-dir="toEarth"
+                        onclick="setAlienDirection('toEarth')">Alien → English</button>
+                </div>
 
-        <button id="copyButton" onclick="copyResult()">Copy</button>
+                <label class="field-label" id="alienInLabel" for="alienIn">English word or sentence</label>
+                <textarea id="alienIn" class="field-input" placeholder="i don't know if you love me"
+                    oninput="pulse('scope4', this.value)"></textarea>
+                <div class="row">
+                    <button class="go" onclick="runAlien()">Convert</button>
+                    <button class="ghost" onclick="clearPanel('alienIn','alienOut','alienMode','scope4')">Clear</button>
+                </div>
+                <div class="output-wrap">
+                    <div class="output-meta">
+                        <span class="mode-readout" id="alienMode"></span>
+                        <button class="copy-btn" onclick="copyFrom('alienOut')">copy</button>
+                    </div>
+                    <div class="output empty alien" id="alienOut">Result appears here</div>
+                </div>
+
+                <details class="legend">
+                    <summary>known phrases</summary>
+                    <div class="legend-grid" id="alienLegend"></div>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            built by <a href="https://instagram.com/theonlyriad" target="_blank" rel="noopener">@theonlyriad</a>
+        </footer>
     </div>
 
-    <script>
-        function convert() {
-            const inputEl = document.getElementById('input');
-            const outEl = document.getElementById('output');
-            const modeEl = document.getElementById('mode');
-            const raw = inputEl.value.trim();
-
-            if (!raw) {
-                outEl.textContent = 'Please enter something.';
-                modeEl.textContent = '';
-                modeEl.className = '';
-                return;
-            }
-
-            if (/^\d+$/.test(raw) && !/^[01]+$/.test(raw)) {
-                outEl.textContent = Number(raw).toString(2);
-                modeEl.textContent = 'Number → Binary';
-                modeEl.className = 'mode-number';
-                return;
-            }
-
-            if (/^[01\s]+$/.test(raw)) {
-                const compact = raw.replace(/\s+/g, '');
-                if (compact.length % 8 === 0) {
-                    const bytes = raw.includes(' ') ? raw.split(/\s+/) : compact.match(/.{1,8}/g) || [];
-                    try {
-                        const decoded = bytes.map(b => String.fromCharCode(parseInt(b, 2))).join('');
-                        outEl.textContent = decoded;
-                        modeEl.textContent = 'Binary → Text';
-                        modeEl.className = 'mode-binary';
-                    } catch (e) {
-                        outEl.textContent = '⚠️ Invalid binary bytes.';
-                        modeEl.textContent = 'Error';
-                        modeEl.className = '';
-                    }
-                } else {
-                    const decimal = parseInt(compact, 2);
-                    if (!Number.isNaN(decimal)) {
-                        outEl.textContent = decimal.toString();
-                        modeEl.textContent = 'Binary → Number';
-                        modeEl.className = 'mode-number';
-                    } else {
-                        outEl.textContent = '⚠️ Invalid binary input.';
-                        modeEl.textContent = 'Error';
-                        modeEl.className = '';
-                    }
-                }
-                return;
-            }
-
-            const binary = Array.from(raw).map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
-            outEl.textContent = binary;
-            modeEl.textContent = 'Text → Binary';
-            modeEl.className = 'mode-text';
-        }
-
-        function clearAll() {
-            document.getElementById('input').value = '';
-            document.getElementById('output').textContent = '';
-            const modeEl = document.getElementById('mode');
-            modeEl.textContent = '';
-            modeEl.className = '';
-            document.getElementById('input').focus();
-        }
-
-        function copyResult() {
-            const outEl = document.getElementById('output');
-            const text = outEl.innerText || outEl.textContent || '';
-            if (!text) { alert('Nothing to copy.'); return; }
-
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => { showCopyToast(); }).catch(() => { fallbackCopy(text); });
-            } else { fallbackCopy(text); }
-        }
-
-        function fallbackCopy(text) {
-            const ta = document.createElement('textarea');
-            ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
-            document.body.appendChild(ta); ta.focus(); ta.select();
-            try { document.execCommand('copy'); showCopyToast(); } catch (e) { alert('Copy failed: ' + e); }
-            document.body.removeChild(ta);
-        }
-
-        function showCopyToast() {
-            const btn = document.getElementById('copyButton');
-            const orig = btn.textContent; btn.textContent = 'Copied ✓';
-            setTimeout(() => btn.textContent = orig, 1200);
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 
